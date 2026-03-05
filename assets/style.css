@@ -968,11 +968,27 @@ HERO GRID – Animated Gradient Fade
     /* Header */
 
     .site-header {
-        padding: 20px 20px;
+        padding: 16px 20px;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .brand-logo {
+        height: 42px;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .site-nav {
+        display: flex;
+        justify-content: center;
+        gap: 18px;
+        flex-wrap: wrap;
     }
 
     .site-nav a {
-        margin-left: 16px;
+        margin-left: 0;
         font-size: 11px;
         letter-spacing: 1.2px;
     }
