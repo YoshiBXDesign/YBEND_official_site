@@ -193,6 +193,18 @@
         initHeaderAutoHide();
         initContactPrefill();
         // =========================================
+        // LOAD SHARED FOOTER COMPONENT
+        // =========================================
+        const footerContainer = document.getElementById("footer");
+        if (footerContainer) {
+            fetch("components/footer.html")
+                .then(res => res.text())
+                .then(data => {
+                    footerContainer.innerHTML = data;
+                })
+                .catch(err => console.error("Footer load failed:", err));
+        }
+        // =========================================
         // STOP GRID AFTER 5 SECONDS
         // =========================================
 

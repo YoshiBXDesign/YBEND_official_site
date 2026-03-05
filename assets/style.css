@@ -585,8 +585,35 @@ EMAIL GATE LABEL
 @media (max-width:768px) {
 
     .footer-nav {
-        flex-direction: column;
-        gap: 12px;
+        display: grid;
+        grid-template-columns: repeat(3, max-content);
+        justify-content: center;
+        justify-items: center;
+        column-gap: 16px;
+        row-gap: 12px;
+        text-align: center;
+    }
+
+    /* row 1 */
+    .footer-nav a:nth-child(1) {
+        grid-column: 1;
+    }
+
+    .footer-nav a:nth-child(2) {
+        grid-column: 2;
+    }
+
+    .footer-nav a:nth-child(3) {
+        grid-column: 3;
+    }
+
+    /* row 2 */
+    .footer-nav a:nth-child(4) {
+        grid-column: 1;
+    }
+
+    .footer-nav a:nth-child(5) {
+        grid-column: 3;
     }
 
 }
@@ -983,12 +1010,18 @@ HERO GRID – Animated Gradient Fade
     }
 
     .site-nav {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(5, max-content);
         justify-content: center;
-        align-items: center;
-        gap: 18px;
-        flex-wrap: wrap;
+        justify-items: center;
+        column-gap: 8px;
+        row-gap: 10px;
         width: 100%;
+        text-align: center;
+    }
+
+    .site-nav a {
+        margin-left: 0;
     }
 
     /* Hero */
@@ -1056,18 +1089,22 @@ HERO GRID – Animated Gradient Fade
         width: 100%;
     }
 
-    /* Email Gate */
+    /* Email Gate (mobile spacing fix) */
 
     .diagnosis-gate {
-        padding: 80px 0;
+        /* bring the outlined box in from the screen edges */
+        margin: 0 20px;
+        padding: 32px 20px;
     }
 
     .gate {
         flex-direction: column;
+        gap: 12px;
     }
 
     .gate input {
         width: 100%;
+        min-width: 0;
     }
 
     /* Result */
@@ -1368,6 +1405,54 @@ HERO GRID – Animated Gradient Fade
 
     .objective-btn {
         font-size: 12px;
+    }
+
+}
+
+/* =========================
+   Mobile Menu Layout
+   3 + 2 grid
+========================= */
+
+@media (max-width:768px) {
+
+    .site-nav {
+        display: grid;
+        grid-template-columns: repeat(3, max-content);
+        justify-content: center;
+        justify-items: center;
+        column-gap: 16px;
+        row-gap: 10px;
+        text-align: center;
+    }
+
+    /* row 1 */
+    .site-nav a:nth-child(1) {
+        grid-column: 1;
+    }
+
+    .site-nav a:nth-child(2) {
+        grid-column: 2;
+    }
+
+    .site-nav a:nth-child(3) {
+        grid-column: 3;
+    }
+
+    /* row 2 */
+    .site-nav a:nth-child(4) {
+        grid-column: 1;
+        white-space: nowrap;
+    }
+
+    .site-nav a:nth-child(5) {
+        grid-column: 3;
+    }
+
+    /* tap area */
+    .site-nav a {
+        display: block;
+        padding: 8px 6px;
     }
 
 }
