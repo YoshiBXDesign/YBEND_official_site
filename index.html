@@ -1,0 +1,294 @@
+<!-- /index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yoshi Brand Experience & Design.</title>
+
+    <link rel="stylesheet" href="https://use.typekit.net/ohl8evu.css" />
+    <link rel="stylesheet" href="assets/style.css" />
+</head>
+
+<body>
+    <header class="site-header" id="siteHeader">
+        <a class="brand" href="index.html" aria-label="Yoshi Brand Experience & Design.">
+            <img class="brand-logo" src="assets/img/functional-logo.svg" alt="Yoshi Brand Experience & Design." />
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+            <a href="index.html" aria-current="page">Home</a>
+            <a href="about.html">About</a>
+            <a href="expertise.html">Expertise</a>
+            <a href="field-notes.html">Field Notes</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main class="page">
+
+        <!-- HERO -->
+        <section class="hero" aria-label="Hero">
+            <div class="hero-grid" aria-hidden="true"></div>
+            <div class="hero-bg-grid"></div>
+
+            <p class="hero-kicker">
+                Decision Architecture → Design Translation
+            </p>
+
+            <h1 class="hero-line">
+                The problem is rarely the design.
+            </h1>
+
+            <h2 class="hero-line hero-line--muted">
+                It’s the <span class="decisions">decisions</span> made before it.
+            </h2>
+
+            <p class="hero-sub">
+                Before logo. Before layout. Before launch.
+            </p>
+
+        </section>
+
+        <!-- PROOF -->
+        <section class="proof" aria-label="Proof block">
+            <p class="proof-head">When sequence breaks, costs don’t stay linear.</p>
+            <p class="proof-body">
+                If positioning is unsettled, design revisions never converge.<br>
+                A menu change becomes layout change.<br>
+                A layout change becomes signage and flow change.
+            </p>
+        </section>
+
+        <!-- DIAGNOSIS -->
+        <section class="diagnosis page" id="diagnosis">
+
+            <h2 class="section-title">Structural Diagnosis</h2>
+            <div class="diagnosis-progress" aria-hidden="true"></div>
+
+            <!-- QUESTION 1 -->
+            <div class="card question-step" data-step="1">
+
+                <div class="label">Concept Stage</div>
+
+                <h3 class="question">
+                    Which stage best describes your concept?
+                </h3>
+
+                <div class="answers">
+                    <button class="btn answer" data-value="A">Evolving</button>
+                    <button class="btn answer" data-value="B">Defined (Position unclear)</button>
+                    <button class="btn answer" data-value="C">Defined (Ready for execution)</button>
+                    <button class="btn answer" data-value="D">Execution (Already moving)</button>
+                </div>
+
+            </div>
+
+            <!-- QUESTION 2 -->
+            <div class="card question-step is-hidden" data-step="2">
+
+                <div class="label">Operational Structure</div>
+
+                <h3 class="question">
+                    How clearly is the operational structure defined?
+                </h3>
+
+                <div class="answers">
+                    <button class="btn answer" data-value="A">Not defined</button>
+                    <button class="btn answer" data-value="B">Partially defined</button>
+                    <button class="btn answer" data-value="C">Mostly defined</button>
+                    <button class="btn answer" data-value="D">Fully mapped</button>
+                </div>
+
+            </div>
+
+            <!-- QUESTION 3 -->
+            <div class="card question-step is-hidden" data-step="3">
+
+                <div class="label">Decision Structure</div>
+
+                <h3 class="question">
+                    How are major brand decisions made?
+                </h3>
+
+                <div class="answers">
+                    <button class="btn answer" data-value="A">Often revisited</button>
+                    <button class="btn answer" data-value="B">Sometimes revised</button>
+                    <button class="btn answer" data-value="C">Mostly consistent</button>
+                    <button class="btn answer" data-value="D">Clear structure</button>
+                </div>
+
+            </div>
+
+            <!-- EMAIL GATE -->
+            <div class="card diagnosis-gate is-hidden" id="emailGate">
+
+                <p class="label">Next Step</p>
+                <h3 class="question">
+                    Enter your email to receive the structural diagnosis.
+                </h3>
+
+                <div class="gate">
+                    <input type="email" placeholder="Enter your email" id="diagnosisEmail" />
+                    <button class="btn btn--primary" id="submitDiagnosis">
+                        Continue
+                    </button>
+                </div>
+
+                <p class="hint">
+                    Your result will appear immediately.
+                    No newsletters. No automated sequences.
+                </p>
+
+            </div>
+
+            <!-- RESULT -->
+            <div class="diagnosis-result is-hidden" id="diagnosisResult">
+
+                <div class="result-strong" id="resultTitle"></div>
+
+                <p class="result-soft" id="resultText"></p>
+                <!-- CONFIDENCE + INTERPRETATION + POSITION + CTA -->
+                <div class="result-after">
+
+                    <p class="result-confidence">
+                        This diagnosis reflects decision order, not design preference.
+                    </p>
+
+                    <div class="result-interpretation">
+                        <p class="label">Interpretation</p>
+                        <p class="result-note">
+                            <!-- 仮テキスト：後で結果に応じて動的に差し替え可（今は固定でもOK） -->
+                            The pattern here is structural friction: decisions are being made without a stable sequence,
+                            so execution keeps re-triggering earlier choices.
+                        </p>
+                    </div>
+
+                    <div class="result-position">
+                        <p class="label">Professional Position</p>
+                        <p class="result-note">
+                            Decision Architecture is where I work: clarifying the order of decisions, then translating
+                            it into form with accountability.
+                        </p>
+                    </div>
+
+                    <a class="cta cta--arrow" href="contact.html">
+                        Start the working conversation →
+                    </a>
+                    <p class="cta-note">
+                        Most conversations begin with a short exchange by email.
+                    </p>
+
+                    <p class="microcopy">
+                        This is not a sales call.<br>
+                        It’s the beginning of a working conversation.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- DECISION ARCHITECTURE -->
+        <section class="section" id="decision" aria-label="Decision Architecture">
+            <h2 class="section-title">Decision Architecture</h2>
+
+            <p class="body">
+                If the structure is misaligned, design will only amplify the problem.
+                This is how it is corrected.
+            </p>
+
+            <p class="body">
+                Not as “frameworks.” As an accountable partner who designs the order of
+                decisions, then translates it into form.
+            </p>
+
+            <div class="founder-signature">
+                <img src="assets/img/profile.png" alt="Yoshi portrait" class="founder-photo" />
+
+                <div class="founder-meta">
+                    <p class="founder-title">Design Architecture Partner</p>
+                    <p class="founder-statement">
+                        I work with founders who want clarity before visibility.
+                        I build the decision structure. Then I translate it into form —
+                        and stay accountable for both.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- STRUCTURAL BREAK -->
+        <section class="structural-break" aria-label="Structural inevitability">
+            <p class="structural-line">
+                If the decision is wrong,<br />
+                the design will perform it perfectly.
+            </p>
+        </section>
+
+        <!-- DESIGN TRANSLATION -->
+        <section class="section" aria-label="Design Translation">
+            <h2 class="section-title">Design Translation</h2>
+
+            <p class="body">
+                Execution follows structure. Once priorities are clear, design becomes
+                translation — identity, space, and experience aligned under one decision
+                system.
+            </p>
+
+            <p class="body">
+                Separate phases. One accountability.
+            </p>
+        </section>
+
+
+    </main>
+
+    <footer class="site-footer">
+
+        <div class="footer-inner">
+
+            <img class="footer-logo" src="assets/img/primary-logo.svg" alt="Yoshi Brand Experience & Design">
+
+
+            <nav class="footer-nav" aria-label="Footer navigation">
+
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="expertise.html">Expertise</a>
+                <a href="field-notes.html">Field Notes</a>
+                <a href="contact.html">Contact</a>
+
+            </nav>
+
+            <div class="footer-cta">
+                Not sure yet?
+                <a href="contact.html">Start a working conversation →</a>
+            </div>
+
+            <p class="footer-contact">
+                yoshi.ueda@yoshibrandx.design
+            </p>
+
+            <p class="footer-small">
+                © 2026 Yoshi Brand Experience & Design
+            </p>
+
+        </div>
+
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <script>
+        (function () {
+            emailjs.init("xR78ZybyHTFUyBXZ8");
+        })();
+    </script>
+
+    <script defer src="assets/js/main.js"></script>
+</body>
+
+</html>

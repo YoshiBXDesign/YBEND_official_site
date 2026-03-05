@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact — Yoshi Brand Experience & Design.</title>
+    <link rel="stylesheet" href="https://use.typekit.net/ohl8evu.css" />
+    <link rel="stylesheet" href="assets/style.css" />
+</head>
+
+<body>
+    <header class="site-header" id="siteHeader">
+        <a class="brand" href="index.html" aria-label="Yoshi Brand Experience & Design.">
+            <img class="brand-logo" src="assets/img/functional-logo.svg" alt="Yoshi Brand Experience & Design." />
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="expertise.html">Expertise</a>
+            <a href="field-notes.html">Field Notes</a>
+            <a href="contact.html" aria-current="page">Contact</a>
+        </nav>
+    </header>
+
+    <main class="page">
+        <section class="page-hero" aria-label="Contact">
+            <h1 class="page-title">Contact</h1>
+            <p class="body">
+                Start the working conversation.<br>
+                If your project requires structural clarity before execution,
+                this is where the conversation begins.
+            </p>
+        </section>
+
+        <section class="section" aria-label="Form">
+            <form class="form" id="contactForm" novalidate>
+                <!-- Objective selection (Design workflow mode) -->
+                <div class="objective" id="objectiveBlock">
+                    <p class="objective-lead">
+                        I design outcomes. I start with decision clarity so execution holds.
+                    </p>
+
+                    <div class="objective-options">
+                        <button type="button" class="objective-btn" data-objective="direction">
+                            Direction-first (Clarity before design)
+                            <span class="objective-sub">(I need to align the concept, priorities, and constraints so the
+                                design doesn’t drift.)</span>
+                        </button>
+
+                        <button type="button" class="objective-btn" data-objective="execution">
+                            Execution-first (Design translation)
+                            <span class="objective-sub">(The direction is already defined. I need design execution:
+                                identity / website / materials.)</span>
+                        </button>
+                    </div>
+                </div>
+                <label class="field">
+                    <span class="label">Name</span>
+                    <input class="input" type="text" name="name" autocomplete="name" required />
+                </label>
+
+                <label class="field">
+                    <span class="label">Email</span>
+                    <input class="input" type="email" name="email" autocomplete="email" required />
+                </label>
+
+                <div class="diagnosis-report" id="diagnosisReport" aria-label="Diagnosis summary"></div>
+
+                <label class="field">
+                    <span class="label">Context (Optional)</span>
+                    <textarea class="textarea" id="contactMessage" name="message" rows="5"
+                        placeholder="Add context if helpful."></textarea>
+                </label>
+
+                <button class="primary" id="submitBtn" type="submit">
+                    <span class="btn-label">Start the working conversation</span>
+                    <span class="btn-loading" aria-hidden="true" style="display:none;">Sending…</span>
+                </button>
+                <div id="formError" class="form-error" aria-live="assertive" style="display:none; margin-top:12px;">
+                </div>
+                <div id="formStatus" class="form-status" aria-live="polite" style="display:none; margin-top:18px;">
+                    <strong>Message received.</strong><br>
+                    Thank you. Your message has been delivered successfully.<br>
+                    Most inquiries receive a response within three business days.
+                </div>
+            </form>
+
+            <p class="hint">
+                Most inquiries receive a response within three business days.<br>
+                If this is urgent, write “urgent” in the first line.
+            </p>
+        </section>
+
+        <footer class="site-footer" aria-label="Footer">
+            <p class="footer-small">© Yoshi Brand Experience & Design.</p>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script defer src="assets/js/contact.js"></script>
+    <script defer src="assets/js/main.js"></script>
+</body>
+
+</html>
