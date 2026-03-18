@@ -218,12 +218,28 @@
     });
 })();
 
+function scrollToElement(el) {
+    if (!el) return;
+    el.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
 // =========================================================
 // CONTACT PAGE: Prefill message from diagnosis result
 // =========================================================
 function initContactPrefill() {
 
     const stored = sessionStorage.getItem("diagnosisResult");
+    const ctaStored = sessionStorage.getItem("ctaContext");
+
+    let cta;
+    try {
+        cta = JSON.parse(ctaStored);
+    } catch (e) {
+        cta = null;
+    }
     if (!stored) return;
 
     let data;
@@ -238,7 +254,6 @@ function initContactPrefill() {
         document.querySelector('textarea[name="message"]');
 
     if (!textarea) return;
-
     const prefillText =
         `Diagnosis reference
 
@@ -248,13 +263,24 @@ ${data.title}
 Summary:
 ${data.text}
 
+Recommended Direction:
+${cta ? cta.primary : ""}
+
+Context:
+${cta ? cta.micro : ""}
+
 Objective:
 I would like to begin a working conversation regarding the structural condition of the concept.`;
 
-    textarea.placeholder = prefillText;
+    if (!textarea.value.trim()) {
+        textarea.value = prefillText;
+    }
+
+    textarea.placeholder = "Add anything specific about your project, timeline, or priorities.";
+
     // UX improvement: guide the user directly to the message field
     setTimeout(() => {
-        smoothScrollTo(textarea);
+        scrollToElement(textarea);
         textarea.focus();
     }, 300);
 }
@@ -329,10 +355,82 @@ if (submitBtn) {
         const title = document.getElementById("resultTitle");
         const text = document.getElementById("resultText");
 
-        if (title) title.textContent = resultData.title;
-        if (text) text.textContent = resultData.text;
+        const analysisSteps = [
+            "Define the core decision sequence.",
+            "Identify structural friction in operations.",
+            "Trace impact on spatial and workflow design.",
+            "Evaluate nonlinear cost implications."
+        ];
+
+        let stepIndex = 0;
+
+        // Show result box early (for analysis display)
+        if (resultBox) resultBox.classList.remove("is-hidden");
+        smoothScrollTo(resultBox);
+
+        function runAnalysisSteps() {
+            if (!text) return;
+
+            if (stepIndex < analysisSteps.length) {
+                text.textContent = analysisSteps[stepIndex];
+                stepIndex++;
+                setTimeout(runAnalysisSteps, 700); // ~0.7s per step
+            } else {
+                // Final result rendering
+                if (title) title.textContent = resultData.title;
+                if (text) text.textContent = resultData.text;
+            }
+        }
+
+        runAnalysisSteps();
+
+        // =========================================================
+        // DYNAMIC CTA BUTTON (Result-based)
+        // =========================================================
+        const ctaButton = document.querySelector("#resultCTA");
+        const ctaMicro = document.querySelector("#resultCTAMicro");
+
+        const ctaMap = {
+            "Foundational Blur": {
+                primary: "Resolve the foundational structure.",
+                micro: "Begin a working conversation to clarify your core concept before visual execution."
+            },
+            "Sequence Drift": {
+                primary: "Lock the decision sequence.",
+                micro: "Begin a working conversation to clarify your architecture before committing design capital."
+            },
+            "Misaligned Momentum": {
+                primary: "Realign the core structure.",
+                micro: "Pause execution and begin a working conversation to realign before further capital is deployed."
+            },
+            "Strategic Coherence": {
+                primary: "Translate the structure without deviation.",
+                micro: "Begin a working conversation to ensure physical execution strictly serves your strategy."
+            }
+        };
+
+        const dynamicCTA = ctaMap[resultData.title];
+
+        if (dynamicCTA) {
+            if (ctaButton) ctaButton.textContent = dynamicCTA.primary;
+            if (ctaMicro) ctaMicro.textContent = dynamicCTA.micro;
+        }
+
+        // =========================================================
+        // CTA CLICK → CONTACT PAGE (Context Carryover)
+        // =========================================================
+        if (ctaButton) {
+            ctaButton.addEventListener("click", () => {
+                window.location.href = "contact.html";
+            });
+        }
 
         sessionStorage.setItem("diagnosisResult", JSON.stringify(resultData));
+
+        // CTA CONTEXT CARRYOVER (reuse existing mapping)
+        if (dynamicCTA) {
+            sessionStorage.setItem("ctaContext", JSON.stringify(dynamicCTA));
+        }
         resultBox.classList.remove("is-hidden");
         smoothScrollTo(resultBox);
 
@@ -385,65 +483,59 @@ function calculateResult() {
     if (score <= 5) {
         return {
             title: "Foundational Blur",
-            text: `Your responses indicate that the underlying structure of the concept is not yet fully defined.
+            text: `Your diagnostic pattern indicates that the core structure of the concept has not yet been defined with sufficient clarity.
 
-At this stage, the relationship between concept, positioning, and operational reality remains partially unresolved.
+Without a fixed foundation, decisions cannot follow a stable sequence. Concept, operations, and design begin to move forward independently, without a governing structure. This creates a condition where each new decision is based on assumptions, rather than a locked strategic baseline.
 
-When a restaurant concept advances without structural definition, decisions tend to occur in isolation. Menu development, interior direction, brand language, and operational planning begin to move forward independently.
+In food and beverage environments, this lack of definition produces immediate structural friction. If the menu direction is not fully established, the kitchen layout cannot be finalized. An unresolved layout forces ongoing adjustments in spatial flow, guest movement, and service clarity. These changes are not isolated. Each one compounds the previous, and costs do not stay linear.
 
-Each element may appear reasonable on its own, yet the absence of an integrated structure gradually introduces friction between them.
+The issue is not execution, but the absence of a defined structure guiding it. Without that foundation, progress introduces instability rather than coherence.
 
-Clarifying the structural foundation resolves this condition.
-
-The appropriate next step is to formalize the concept structure before committing further resources to execution.`
+All physical and visual execution must be paused until the structure is clarified. The core concept and operational logic must be defined and locked first. Only then can design and operations function as precise translations, rather than iterative corrections of an unresolved idea.`
         };
     }
 
     if (score <= 7) {
         return {
             title: "Sequence Drift",
-            text: `Your responses suggest that the project is progressing, yet the order in which key decisions are being made may not be fully aligned.
+            text: `Your current diagnostic pattern indicates that key decisions within the concept are not following a stable sequence.
 
-In restaurant development, the sequence of decisions determines the stability of the project. Concept definition typically informs operational structure, which then informs spatial design, service systems, and brand expression. When this order becomes inverted, components begin to develop without a shared structural reference.
+When decision order becomes inconsistent, execution loses a reliable reference point. Concept, operations, and design begin to evolve independently, without a fixed structural baseline. This creates conditions where each new decision forces a reinterpretation of what should have already been resolved.
 
-The result is gradual drift between layers of the project. A design direction may emerge before operational logic is finalized. A brand narrative may develop before positioning is fully defined. Operational systems may evolve independently from the guest experience they are meant to support.
+In food and beverage environments, this misalignment produces a cascading effect. A change in menu direction alters operational requirements. That shift impacts spatial layout. Adjustments to layout then disrupt flow, guest movement, and service clarity. These changes are not isolated. Each one compounds the previous, and costs do not stay linear.
 
-When these elements advance out of sequence, later stages of the project require structural correction. These corrections increase complexity and frequently introduce delays during implementation.
+The issue is not the quality of individual decisions, but the absence of a fixed sequence governing them. Without that structure, progress generates friction rather than clarity.
 
-Realigning the decision sequence restores coherence. By reconnecting concept, operations, and design within a single structural framework, the project can continue forward without accumulating additional friction.
-
-The next step is to re-establish the structural order of the project’s core decisions.`
+Execution must follow a defined order. Before advancing further, the decision sequence must be clarified and locked. Only then can design and operations function as precise extensions of the concept, rather than continuous corrections of it.`
         };
     }
 
     if (score <= 9) {
         return {
             title: "Misaligned Momentum",
-            text: `Your responses indicate that the concept has progressed beyond early definition and that several components of the project are already taking shape.
+            text: `Your diagnostic pattern indicates that the project is advancing, but key components are not structurally aligned.
 
-At this stage, development momentum is present. However, momentum alone does not guarantee structural alignment. When multiple elements of a project advance simultaneously, differences in their underlying logic can begin to appear.
+Execution is progressing across concept, operations, and design, yet these elements are not governed by a unified decision sequence. As a result, physical and visual choices are being made before their dependencies are fully resolved.
 
-Concept positioning, operational systems, spatial design, and brand expression must ultimately reinforce the same structural intent. If these elements evolve under different assumptions, inconsistencies appear between the idea of the restaurant and the way it functions in practice.
+In food and beverage environments, this misalignment produces compounding friction. Because costs do not stay linear, forward movement under incorrect assumptions increases financial exposure. A shift in menu direction requires immediate changes to operational setup. That change impacts spatial layout. Layout adjustments then disrupt flow, guest experience, and service clarity. Each step compounds the previous, creating structural debt rather than progress.
 
-These inconsistencies often remain hidden during early development. They become visible when operational planning, service flow, or spatial constraints force the concept to translate into real conditions.
+The issue is not a lack of progress, but progress occurring without alignment. Without a synchronized structure, execution scales inconsistency.
 
-Resolving this condition requires structural alignment rather than additional momentum. By clarifying how each component of the project supports the core concept, the development process regains coherence.
-
-The next step is to align the existing components of the project under a unified structural framework before moving deeper into execution.`
+Execution must be paused and realigned. The operational framework and brand logic must be brought into structural agreement before further capital is committed. Only then can momentum translate into a coherent physical and operational system, rather than a series of costly corrections.`
         };
     }
 
     return {
         title: "Strategic Coherence",
-        text: `Your responses indicate a high degree of alignment between concept, operational thinking, and decision structure.
+        text: `Your diagnostic pattern indicates that the concept is structurally coherent and properly sequenced.
 
-In structurally coherent restaurant concepts, decisions follow a clear hierarchy. The concept defines the intent of the project. Operational systems translate that intent into repeatable processes. Spatial design and brand expression then communicate the structure to guests through physical experience.
+The relationship between concept, operations, and design is clearly defined. Decisions are being made within a stable framework, allowing each layer of the project to reinforce the same underlying logic. The primary challenge is no longer definition, but preserving this structure through execution.
 
-When these layers reinforce one another, the concept becomes stable. Design decisions occur with clear constraints. Operational planning follows the logic of the concept rather than reacting to it. Brand expression reflects the underlying structure instead of compensating for its absence.
+In food and beverage environments, even a well-defined structure is vulnerable to execution drift. Costs do not stay linear if translation introduces inconsistencies. A minor change in spatial flow can force adjustments in kitchen layout. That adjustment can restrict menu capabilities, gradually destabilizing the operational system. These changes compound over time, introducing friction into what was previously a coherent structure.
 
-This alignment allows the project to move into implementation with minimal structural revision. The primary work shifts from defining the concept to translating it into operational systems, spatial experience, and brand expression.
+The risk is not structural failure, but gradual misalignment during implementation. Without strict control, execution can begin to diverge from the original logic.
 
-The next step is controlled execution: converting the defined structure into a functioning restaurant environment.`
+Execution must strictly follow the defined structure. Every spatial, operational, and visual decision must map directly to the established framework. Only through controlled translation can the concept maintain its integrity, ensuring that the final environment performs exactly as intended, without introducing new structural friction.`
     };
 
 }

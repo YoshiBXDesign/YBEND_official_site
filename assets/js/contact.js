@@ -92,13 +92,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            // Include diagnosis summary if it exists
+            // Include diagnosis summary only if it is not already present in the message
             const report = document.getElementById("diagnosisReport");
             let diagnosisText = "";
 
-            if (report && report.innerText.trim()) {
-                diagnosisText = "\n\n--- Diagnosis Summary ---\n" + report.innerText.trim() +
-                    "\n";
+            if (
+                report &&
+                report.innerText.trim() &&
+                !message.includes("Diagnosis:") &&
+                !message.includes("Interpretation:")
+            ) {
+                diagnosisText = "\n\n--- Diagnosis Summary ---\n" + report.innerText.trim() + "\n";
             }
 
             message = "Reply email: " + email + "\n\n" + objectiveText + diagnosisText + message;
