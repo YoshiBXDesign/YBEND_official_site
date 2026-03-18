@@ -126,6 +126,8 @@ body {
 
     transform: translateY(30px);
     opacity: 0;
+
+    word-break: keep-all;
 }
 
 .hero-line.is-active {
@@ -203,6 +205,7 @@ body {
     font-weight: 400;
     font-size: clamp(40px, 5vw, 72px);
     margin: 0 0 80px 0;
+    word-break: keep-all;
 }
 
 .body {
@@ -262,19 +265,31 @@ body {
 
 .btn {
     border: 1px solid var(--border-strong);
-    background: transparent;
+    background: rgba(0, 0, 0, 0.02);
     padding: 16px 28px;
     font-size: 13px;
     letter-spacing: 1px;
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.2s ease;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.02);
+    -webkit-tap-highlight-color: transparent;
 }
 
 .btn:hover {
     background: var(--sumi-black);
     color: var(--washi-white);
     transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: scale(0.98);
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.btn:focus-visible {
+    outline: 1px solid var(--sumi-black);
+    outline-offset: 2px;
 }
 
 .btn--primary {
@@ -414,14 +429,6 @@ EMAIL GATE LABEL
 
 .result-cta {
     margin-top: 40px;
-}
-
-.cta {
-    text-decoration: none;
-    border-bottom: 1px solid var(--sumi-black);
-    font-size: 14px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
 }
 
 .cta-intro {
@@ -1098,6 +1105,7 @@ HERO GRID – Animated Gradient Fade
     .hero-line {
         font-size: clamp(40px, 10vw, 56px);
         line-height: 1.02;
+        word-break: keep-all;
     }
 
     .hero-sub {
@@ -1118,16 +1126,18 @@ HERO GRID – Animated Gradient Fade
     /* Sections */
 
     .section {
-        padding: 100px 0 0 0;
+        padding: 80px 0 0 0;
     }
 
     .section-title {
         font-size: clamp(32px, 7vw, 42px);
         margin-bottom: 28px !important;
+        word-break: keep-all;
     }
 
     .diagnosis .section-title {
         margin-bottom: 24px !important;
+        word-break: keep-all;
     }
 
     .body {
@@ -1262,11 +1272,23 @@ HERO GRID – Animated Gradient Fade
 /* CTA link */
 
 .cta {
+    display: inline-block;
     font-size: 13px;
     letter-spacing: 1.6px;
     text-transform: uppercase;
-    border-bottom: 1px solid var(--sumi-black);
+    border-bottom: 2px solid var(--sumi-black);
     padding-bottom: 4px;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+    cursor: pointer;
+}
+
+.cta:hover {
+    transform: translateY(-1px);
+    opacity: 0.9;
+}
+
+.cta:active {
+    transform: scale(0.98);
 }
 
 /* CTA note */
