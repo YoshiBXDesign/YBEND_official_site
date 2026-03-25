@@ -10,6 +10,16 @@
 
     --font-body: "neue-haas-unica", "noto-sans", system-ui, sans-serif;
     --font-serif: "freight-text-pro", "source-serif-4", serif;
+
+    --header-height: 160px;
+}
+
+.site-header {
+    height: var(--header-height);
+}
+
+.page {
+    padding-top: var(--header-height);
 }
 
 /* =========================================
@@ -62,7 +72,8 @@ body {
 }
 
 .brand-logo {
-    height: 65px;
+    height: 115px;
+    margin-left: 50px;
 }
 
 .site-nav a {
@@ -71,11 +82,17 @@ body {
     letter-spacing: 1.6px;
     text-transform: uppercase;
     text-decoration: none;
-    color: rgba(24, 26, 27, 0.7);
+    color: var(--sumi-black);
+    opacity: 0.6;
+    transition: opacity 0.18s ease;
+}
+
+.site-nav a:hover {
+    opacity: 1;
 }
 
 .site-nav a[aria-current="page"] {
-    color: var(--sumi-black);
+    opacity: 1;
 }
 
 /* =========================================
@@ -546,7 +563,7 @@ EMAIL GATE LABEL
 ========================================= */
 
 .site-footer {
-    padding: 250px 0 120px;
+    padding: 80px 0 60px;
 }
 
 .footer-inner {
@@ -566,11 +583,6 @@ EMAIL GATE LABEL
     width: 300px;
 }
 
-.footer-brand {
-    font-size: 14px;
-    letter-spacing: 1px;
-}
-
 .footer-nav {
     display: flex;
     gap: 48px;
@@ -584,11 +596,13 @@ EMAIL GATE LABEL
     font-size: 12px;
     letter-spacing: 1.4px;
     text-transform: uppercase;
-    color: rgba(24, 26, 27, 0.6);
+    color: var(--sumi-black);
+    opacity: 0.6;
+    transition: opacity 0.18s ease;
 }
 
-.footer-contact {
-    display: none;
+.footer-nav a:hover {
+    opacity: 1;
 }
 
 .footer-small {
@@ -597,38 +611,6 @@ EMAIL GATE LABEL
     opacity: 0.6;
     margin-top: 48px;
     text-align: left;
-}
-
-.footer-cta {
-    width: 100%;
-    margin-top: 120px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-}
-
-.cta-primary a {
-    font-family: var(--font-serif);
-    font-size: 20px;
-    text-decoration: none;
-    color: var(--sumi-black);
-    border-bottom: 1px solid rgba(24, 26, 27, 0.4);
-    padding-bottom: 4px;
-    transition: transform .15s ease, opacity .15s ease;
-}
-
-.cta-primary a:hover {
-    transform: translateY(-1px);
-    opacity: 0.85;
-}
-
-.cta-secondary {
-    font-size: 13px;
-    max-width: 420px;
-    line-height: 1.6;
-    opacity: 0.55;
 }
 
 /* mobile */
@@ -641,34 +623,6 @@ EMAIL GATE LABEL
         gap: 1rem;
     }
 
-    /* row 1 */
-    .footer-nav a:nth-child(1) {
-        grid-column: 1;
-    }
-
-    .footer-nav a:nth-child(2) {
-        grid-column: 2;
-    }
-
-    .footer-nav a:nth-child(3) {
-        grid-column: 3;
-    }
-
-    .footer-nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-    }
-
-    /* row 2 */
-    .footer-nav a:nth-child(4) {
-        grid-column: 1;
-    }
-
-    .footer-nav a:nth-child(5) {
-        grid-column: 3;
-    }
-
     .footer-inner {
         flex-direction: column;
         justify-content: center;
@@ -677,11 +631,15 @@ EMAIL GATE LABEL
     }
 
     .footer-logo {
-        width: 220px;
+        width: 280px;
         margin-bottom: 24px;
         display: block;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .footer-small {
+        text-align: center;
     }
 
 }
@@ -1057,7 +1015,7 @@ HERO GRID – Animated Gradient Fade
     /* Layout */
 
     .page {
-        padding: 140px 20px 0;
+        padding: 180px 20px 0;
     }
 
     /* Header */
@@ -1072,7 +1030,7 @@ HERO GRID – Animated Gradient Fade
     }
 
     .brand-logo {
-        height: 48px;
+        height: 68px;
         display: block;
         margin: 0 auto;
     }
@@ -1913,6 +1871,80 @@ HERO GRID – Animated Gradient Fade
     max-width: 720px;
 }
 
+/* =========================================
+   FIELD NOTES — MOBILE STRUCTURE (NO HORIZONTAL SCROLL)
+   Switch annotations from absolute → vertical flow
+========================================= */
+
+@media (max-width: 768px) {
+
+    /* Contain any visual overflow at section level (does not break sticky) */
+    .fn-image-block {
+        overflow-x: clip;
+        margin-bottom: 120px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Reset overlay layer to normal flow */
+    .fn-annotations {
+        position: static;
+        transform: none;
+        max-width: 100%;
+        height: auto;
+        margin-top: 24px;
+    }
+
+    .fn-annotations ul {
+        position: static;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    /* Each annotation becomes a readable block */
+    .fn-annotation-item {
+        position: static;
+        width: 100%;
+        font-size: 14px;
+        line-height: 1.7;
+        text-align: left;
+    }
+
+    /* Remove connector lines (desktop-only affordance) */
+    .fn-annotation-item::before {
+        display: none;
+    }
+
+    /* Disable left/right offset system */
+    .fn-annotation-item.is-left,
+    .fn-annotation-item.is-right {
+        left: auto;
+        right: auto;
+        margin: 0;
+        text-align: left;
+    }
+
+    /* Ensure images never exceed viewport */
+    .fn-image-wrapper,
+    .fn-image-wrapper img {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    /* Force annotation BELOW each image */
+    .fn-annotations {
+        order: 2;
+    }
+
+    .fn-image-wrapper {
+        order: 1;
+    }
+}
+
 /* Prevent global img constraints from re-scaling others */
 .fn-image-block.is-menu .fn-image-wrapper img {
     width: 100%;
@@ -1930,28 +1962,25 @@ HERO GRID – Animated Gradient Fade
     margin: 0;
 }
 
-/* Hit area（構造） */
+/* Hit area（48px不可視タップ領域、視覚サイズは変えない） */
 .footer-social a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
     padding: 12px;
-    min-width: 44px;
-    min-height: 44px;
 
-    color: rgba(24, 26, 27, 0.55);
-    transition: color .15s ease, transform .15s ease;
+    color: #181A1B;
+    opacity: 0.6;
+    transition: opacity .18s ease;
 }
 
-/* 視覚サイズ（ここが効く） */
+/* 視覚サイズ固定（Flexbox内でのSVGサイズ消失を阻止） */
 .footer-social svg {
     width: 24px;
     height: 24px;
     min-width: 24px;
-    /* ← 追加: Flexbox内でのSVGサイズ消失（0x0）を強制阻止 */
     min-height: 24px;
-    /* ← 追加: 同上 */
     stroke: currentColor;
     display: block;
     flex-shrink: 0;
@@ -1959,6 +1988,87 @@ HERO GRID – Animated Gradient Fade
 
 /* hover */
 .footer-social a:hover {
-    color: #181A1B;
-    transform: translateY(-1px);
+    opacity: 1;
+}
+
+
+/* =========================================
+   CONVERSION CTA (Final — Pre-Footer)
+========================================= */
+
+.cta-final {
+    padding: 160px 0 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.cta-quiet-link {
+    display: inline-block;
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.15;
+    color: var(--sumi-black);
+    text-decoration: none;
+    opacity: 0.85;
+    padding: 12px 0;
+    transition: opacity 0.18s ease;
+}
+
+.cta-quiet-link:hover,
+.cta-quiet-link:active,
+.cta-quiet-link:focus-visible {
+    opacity: 1;
+}
+
+.cta-friction {
+    margin-top: 28px;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--sumi-black);
+    opacity: 0.7;
+}
+
+.cta-meaning {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--sumi-black);
+    opacity: 0.5;
+    max-width: 380px;
+}
+
+@media (max-width: 768px) {
+    .cta-final {
+        padding: 80px 0 0;
+    }
+}
+
+/* =========================================
+   GLOBAL LINK HOVER (Unified System)
+========================================= */
+
+.site-nav a,
+.footer-nav a,
+.footer-social a,
+.cta-quiet-link {
+    opacity: 0.6;
+    transition: opacity 0.18s ease;
+}
+
+.site-nav a:hover,
+.site-nav a:active,
+.site-nav a:focus-visible,
+.footer-nav a:hover,
+.footer-nav a:active,
+.footer-nav a:focus-visible,
+.footer-social a:hover,
+.footer-social a:active,
+.footer-social a:focus-visible,
+.cta-quiet-link:hover,
+.cta-quiet-link:active,
+.cta-quiet-link:focus-visible {
+    opacity: 1;
 }
