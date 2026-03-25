@@ -197,7 +197,9 @@
         // =========================================
         const footerContainer = document.getElementById("footer");
         if (footerContainer) {
-            fetch("components/footer.html")
+            fetch("components/footer.html?v=" + Date.now(), {
+                    cache: "no-store"
+                })
                 .then(res => res.text())
                 .then(data => {
                     footerContainer.innerHTML = data;
