@@ -191,6 +191,53 @@
         initQ3Flow();
         initEmailGate();
         initHeaderAutoHide();
+
+        function initScrollFade() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            if (!fadeElements.length) return;
+
+            const observerOptions = {
+                root: null,
+                rootMargin: "0px 0px -25% 0px",
+                threshold: 0
+            };
+
+            let delayCounter = 0;
+            let delayTimer = null;
+            const baseDelay = 3000;
+
+            const fadeObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.transitionDelay = `${delayCounter}ms`;
+                        entry.target.classList.add('is-visible');
+
+                        if (entry.target.classList.contains('founder-photo')) {
+                            const meta = entry.target.nextElementSibling;
+                            if (meta && meta.classList.contains('founder-meta')) {
+                                meta.style.transitionDelay = `${delayCounter + 800}ms`;
+                                meta.classList.add('is-visible');
+                            }
+                        }
+
+                        delayCounter += baseDelay;
+
+                        clearTimeout(delayTimer);
+                        delayTimer = setTimeout(() => {
+                            delayCounter = 0;
+                        }, 100);
+
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            fadeElements.forEach(el => {
+                fadeObserver.observe(el);
+            });
+        }
+
+        initScrollFade();
         initContactPrefill();
         // =========================================
         // LOAD SHARED FOOTER COMPONENT

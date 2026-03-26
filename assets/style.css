@@ -236,7 +236,7 @@ body {
 ========================================= */
 
 .structural-break {
-    padding: 180px 0;
+    padding: 160px 0 40px 0;
 }
 
 .structural-line {
@@ -251,7 +251,7 @@ body {
 ========================================= */
 
 .diagnosis {
-    padding: 160px 0;
+    padding: 240px 0 160px 0;
 }
 
 .card {
@@ -568,27 +568,52 @@ EMAIL GATE LABEL
 
 .footer-inner {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
 
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
 
     padding: 2rem 5%;
+    gap: 16px;
+    width: 100%;
 }
 
 .footer-logo {
     width: 300px;
 }
 
+.footer-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    width: 100%;
+}
+
+.footer-top .footer-logo {
+    width: 280px;
+    flex-shrink: 0;
+    margin: 0 auto;
+}
+
+.footer-top .footer-nav {
+    position: static;
+    transform: none;
+    display: flex;
+    gap: 48px;
+    align-items: center;
+    justify-content: center;
+}
+
 .footer-nav {
     display: flex;
     gap: 48px;
-    margin: 0 auto;
     justify-content: center;
-    flex: 1;
+    align-items: center;
+    flex-wrap: nowrap;
 }
 
 .footer-nav a {
@@ -1102,7 +1127,7 @@ HERO GRID – Animated Gradient Fade
     /* Diagnosis */
 
     .diagnosis {
-        padding: 120px 0;
+        padding: 160px 0 120px 0;
     }
 
     .card {
@@ -1193,6 +1218,10 @@ HERO GRID – Animated Gradient Fade
         padding: 60px 0 80px 0;
     }
 
+}
+
+.structural-break {
+    padding: 120px 0 20px 0;
 }
 
 
@@ -1957,9 +1986,10 @@ HERO GRID – Animated Gradient Fade
 
 .footer-social {
     display: flex;
-    gap: 16px;
+    gap: 20px;
+    justify-content: center;
     align-items: center;
-    margin: 0;
+    margin-top: 8px;
 }
 
 /* Hit area（48px不可視タップ領域、視覚サイズは変えない） */
@@ -1982,6 +2012,16 @@ HERO GRID – Animated Gradient Fade
     min-width: 24px;
     min-height: 24px;
     stroke: currentColor;
+    display: block;
+    flex-shrink: 0;
+}
+
+.footer-social svg,
+.footer-social img {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
     display: block;
     flex-shrink: 0;
 }
@@ -2071,4 +2111,34 @@ HERO GRID – Animated Gradient Fade
 .cta-quiet-link:active,
 .cta-quiet-link:focus-visible {
     opacity: 1;
+}
+
+/* =========================================
+   FADE-IN (Quiet Attention System)
+========================================= */
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(12px);
+    will-change: opacity, transform;
+}
+
+.fade-in.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+        opacity 1.8s cubic-bezier(0.25, 0.1, 0.25, 1),
+        transform 1.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.founder-meta {
+    opacity: 0;
+    transform: translateY(12px);
+    will-change: opacity, transform;
+}
+
+.founder-meta.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 1.8s cubic-bezier(0.25, 0.1, 0.25, 1), transform 1.8s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
