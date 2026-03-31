@@ -638,6 +638,33 @@ EMAIL GATE LABEL
     text-align: center;
 }
 
+.footer-legal {
+    margin: 16px 0 8px 0;
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+}
+
+.footer-legal a {
+    color: inherit;
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.18s ease;
+}
+
+.footer-legal a:hover,
+.footer-legal a:active,
+.footer-legal a:focus-visible {
+    opacity: 1;
+}
+
+.footer-legal .separator {
+    margin: 0 12px;
+    opacity: 0.3;
+}
+
 /* mobile */
 
 @media (max-width:768px) {
@@ -2084,6 +2111,90 @@ HERO GRID – Animated Gradient Fade
     .cta-final {
         padding: 80px 0 0;
     }
+}
+
+/* =========================================
+   CTA — Sub Page Variants (Divider / Signature)
+========================================= */
+
+.cta {
+    display: block;
+}
+
+/* --- Divider --- */
+.cta--divider {
+    margin-top: 160px;
+    padding-top: 48px;
+    max-width: 520px;
+}
+
+.cta-divider-line {
+    width: 100%;
+    height: 1px;
+    background: rgba(24, 26, 27, 0.12);
+    margin-bottom: 24px;
+}
+
+.cta-divider-label {
+    font-size: 11px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin-bottom: 16px;
+}
+
+.cta-link {
+    display: inline-block;
+    font-family: var(--font-serif);
+    font-size: 20px;
+    line-height: 1.4;
+    text-decoration: none;
+    color: var(--sumi-black);
+    opacity: 0.8;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.cta-link:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+.cta--divider .cta-note {
+    margin-top: 12px;
+    font-size: 12px;
+    opacity: 0.55;
+}
+
+/* --- Signature --- */
+.cta--signature {
+    margin-top: 160px;
+    max-width: 480px;
+}
+
+.cta-signature-intro {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    opacity: 0.85;
+    margin-bottom: 12px;
+}
+
+.cta-signature-context {
+    font-size: 16px;
+    line-height: 1.6;
+    opacity: 0.65;
+    margin-bottom: 20px;
+}
+
+.cta--signature .cta-note {
+    margin-top: 10px;
+    font-size: 12px;
+    opacity: 0.5;
+}
+
+/* --- Centered variant (Field Notes) --- */
+.cta--centered {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* =========================================
