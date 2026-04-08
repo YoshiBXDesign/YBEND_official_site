@@ -21,12 +21,19 @@
 </head>
 
 <body>
-    <header class="site-header" id="siteHeader">
+    <header class="site-header has-hamburger" id="siteHeader">
         <a class="brand" href="index.html" aria-label="Yoshi Brand Experience & Design.">
             <img class="brand-logo" src="assets/img/primary-logo.svg" alt="Yoshi Brand Experience & Design." />
         </a>
 
-        <nav class="site-nav" aria-label="Primary">
+        <button class="hamburger" type="button" aria-label="Open navigation menu" aria-controls="primaryNav"
+            aria-expanded="false">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+
+        <nav class="site-nav" id="primaryNav" aria-label="Primary">
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
             <a href="expertise.html">Expertise</a>

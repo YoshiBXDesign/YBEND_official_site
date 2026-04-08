@@ -158,6 +158,14 @@
 
         function onScroll() {
             const y = window.scrollY;
+            const openNav = header.querySelector(".site-nav.is-open");
+
+            if (openNav) {
+                header.classList.remove("is-hidden");
+                lastY = y;
+                ticking = false;
+                return;
+            }
 
             if (y < 80) {
                 header.classList.remove("is-hidden");
@@ -183,6 +191,44 @@
     }
 
     // =========================================================
+    // MOBILE HAMBURGER NAV
+    // =========================================================
+    function initHamburgerMenu() {
+        const header = document.querySelector(".site-header.has-hamburger");
+        if (!header) return;
+
+        const button = header.querySelector(".hamburger");
+        const nav = header.querySelector(".site-nav");
+        if (!button || !nav) return;
+
+        const setMenuState = (open) => {
+            button.classList.toggle("is-open", open);
+            nav.classList.toggle("is-open", open);
+            button.setAttribute("aria-expanded", open ? "true" : "false");
+            button.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+        };
+
+        button.addEventListener("click", () => {
+            const nextOpen = !nav.classList.contains("is-open");
+            setMenuState(nextOpen);
+        });
+
+        nav.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+                setMenuState(false);
+            });
+        });
+
+        window.addEventListener("resize", () => {
+            if (window.innerWidth >= 769) setMenuState(false);
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") setMenuState(false);
+        });
+    }
+
+    // =========================================================
     // Boot
     // =========================================================
     window.addEventListener("load", () => {
@@ -190,6 +236,7 @@
         initDiagnosisFlow();
         initQ3Flow();
         initEmailGate();
+        initHamburgerMenu();
         initHeaderAutoHide();
 
         function initScrollFade() {
