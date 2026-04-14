@@ -1093,7 +1093,7 @@ HERO GRID – Animated Gradient Fade
 
     .site-nav {
         display: grid;
-        grid-template-columns: repeat(5, max-content);
+        grid-template-columns: repeat(6, max-content);
         justify-content: center;
         justify-items: center;
         column-gap: 8px;
@@ -2336,4 +2336,499 @@ HERO GRID – Animated Gradient Fade
     opacity: 1;
     transform: translateY(0);
     transition: opacity 1.8s cubic-bezier(0.25, 0.1, 0.25, 1), transform 1.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* =========================================
+   SERVICES PAGE
+========================================= */
+
+.services-page {
+    max-width: 980px;
+}
+
+.services-hero {
+    padding-top: 110px;
+}
+
+.services-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(44px, 6vw, 82px);
+    line-height: 1.05;
+    margin: 0 0 26px 0;
+    max-width: 15ch;
+}
+
+.services-lead {
+    font-size: 21px;
+    line-height: 1.6;
+    margin: 0 0 18px 0;
+    max-width: 58ch;
+    opacity: 0.84;
+}
+
+.services-principle {
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    margin: 0 0 36px 0;
+    max-width: 60ch;
+    opacity: 0.68;
+}
+
+.services-anchor-link {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--sumi-black);
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.services-anchor-link:hover,
+.services-anchor-link:active,
+.services-anchor-link:focus-visible {
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+.services-block {
+    max-width: 760px;
+}
+
+.services-heading {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(32px, 4.4vw, 56px);
+    line-height: 1.14;
+    margin: 0 0 28px 0;
+    max-width: 20ch;
+}
+
+.services-heading--small {
+    font-size: clamp(26px, 3.4vw, 38px);
+}
+
+.services-copy {
+    margin: 0 0 18px 0;
+    font-size: 18px;
+    line-height: 1.78;
+    max-width: 64ch;
+    opacity: 0.78;
+}
+
+.services-sub-label {
+    margin: -6px 0 18px 0;
+    font-size: 12px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    opacity: 0.6;
+}
+
+.services-warning {
+    border-left: 1px solid rgba(24, 26, 27, 0.22);
+    padding-left: 18px;
+    margin-top: 28px;
+    opacity: 0.92;
+}
+
+.services-phase {
+    max-width: 860px;
+    padding-top: 130px;
+}
+
+.services-phase--primary {
+    border: 1px solid rgba(24, 26, 27, 0.24);
+    background: rgba(255, 255, 255, 0.62);
+    padding: 56px clamp(24px, 4vw, 52px) 56px;
+    margin-top: 24px;
+}
+
+.services-phase-head {
+    margin-bottom: 36px;
+}
+
+.services-phase-meta {
+    margin: 0;
+    display: flex;
+    gap: 24px;
+    font-size: 12px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    opacity: 0.72;
+}
+
+.services-phase-part {
+    padding-top: 24px;
+    border-top: 1px solid rgba(24, 26, 27, 0.1);
+    margin-top: 24px;
+}
+
+.services-subheading {
+    margin: 0 0 14px 0;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.3;
+}
+
+.services-list {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.services-list li {
+    margin-bottom: 10px;
+    font-size: 17px;
+    line-height: 1.7;
+    opacity: 0.82;
+}
+
+.services-phase-cta {
+    margin-top: 34px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(24, 26, 27, 0.14);
+}
+
+.services-cta-metrics {
+    margin: 0 0 14px 0;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.74;
+}
+
+.services-book-btn {
+    min-width: 220px;
+}
+
+.services-outcomes {
+    display: grid;
+    gap: 18px;
+}
+
+.services-outcome {
+    border: 1px solid rgba(24, 26, 27, 0.12);
+    padding: 22px 24px;
+}
+
+.services-phase--secondary {
+    border-top: 1px solid rgba(24, 26, 27, 0.12);
+}
+
+.services-range {
+    margin: 24px 0 0 0;
+    font-size: 12px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    opacity: 0.58;
+}
+
+.services-boundary {
+    max-width: 760px;
+    padding-top: 120px;
+}
+
+.services-final-cta {
+    max-width: 760px;
+    padding: 150px 0 190px 0;
+    border-top: 1px solid rgba(24, 26, 27, 0.14);
+}
+
+@media (max-width: 768px) {
+    .services-page {
+        padding-top: 120px;
+    }
+
+    .services-hero {
+        padding-top: 36px;
+    }
+
+    .services-title {
+        font-size: clamp(38px, 11vw, 54px);
+    }
+
+    .services-lead {
+        font-size: 18px;
+    }
+
+    .services-heading {
+        font-size: clamp(30px, 8vw, 42px);
+    }
+
+    .services-copy {
+        font-size: 17px;
+    }
+
+    .services-phase {
+        padding-top: 96px;
+    }
+
+    .services-phase--primary {
+        padding: 36px 22px;
+    }
+
+    .services-phase-meta {
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .services-book-btn {
+        width: 100%;
+    }
+
+    .services-final-cta {
+        padding: 110px 0 130px 0;
+    }
+}
+
+/* =========================================
+   SERVICES V2: Course & A la carte
+========================================= */
+
+.services-menu {
+    max-width: 960px;
+}
+
+.services-course {
+    max-width: 780px;
+    border-top: 1px solid rgba(24, 26, 27, 0.12);
+    padding-top: 110px;
+}
+
+.services-course--warm {
+    border: 1px solid rgba(24, 26, 27, 0.18);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.78) 0%, rgba(245, 244, 240, 0.72) 100%);
+    padding: 48px clamp(24px, 4vw, 52px);
+    margin-top: 8px;
+}
+
+.services-course-head {
+    margin-bottom: 18px;
+}
+
+.services-soft-link {
+    display: inline-block;
+    margin-top: 18px;
+    text-decoration: none;
+    color: var(--sumi-black);
+    font-size: 12px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    opacity: 0.62;
+    transition: opacity 0.18s ease;
+}
+
+.services-soft-link:hover,
+.services-soft-link:active,
+.services-soft-link:focus-visible {
+    opacity: 1;
+}
+
+.services-soft-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    padding: 10px 16px;
+    border: 1px solid rgba(24, 26, 27, 0.26);
+    text-decoration: none;
+    color: var(--sumi-black);
+    font-size: 12px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.62);
+    opacity: 0.82;
+    transition: opacity 0.18s ease, transform 0.18s ease, background 0.18s ease;
+}
+
+.services-soft-cta:hover,
+.services-soft-cta:active,
+.services-soft-cta:focus-visible {
+    opacity: 1;
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.services-menu-list {
+    list-style: none;
+    margin: 32px 0 8px 0;
+    padding: 0;
+    border-top: 1px solid rgba(24, 26, 27, 0.1);
+    --services-price-col: 176px;
+}
+
+.services-menu-group-title {
+    margin: 0;
+    font-size: 11px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    opacity: 0.58;
+}
+
+.services-menu-group--spaced {
+    margin-top: 54px;
+}
+
+.services-menu-item {
+    padding: 18px 0 16px;
+    border-bottom: 1px solid rgba(24, 26, 27, 0.1);
+}
+
+.services-menu-top {
+    display: grid;
+    grid-template-columns: auto 1fr var(--services-price-col);
+    align-items: end;
+    column-gap: 12px;
+}
+
+.services-menu-bottom {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--services-price-col);
+    column-gap: 12px;
+    margin-top: 8px;
+}
+
+.services-menu-name {
+    font-family: var(--font-serif);
+    font-size: 23px;
+    line-height: 1.2;
+    font-weight: 400;
+    white-space: nowrap;
+    opacity: 0.93;
+}
+
+.services-menu-dot {
+    width: 100%;
+    height: 1px;
+    transform: translateY(-5px);
+    border-bottom: 1px dotted rgba(24, 26, 27, 0.16);
+}
+
+.services-menu-price {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    opacity: 0.52;
+    white-space: nowrap;
+    text-align: right;
+}
+
+.services-menu-price-spacer {
+    width: var(--services-price-col);
+    height: 1px;
+}
+
+.services-menu-note {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.75;
+    opacity: 0.55;
+}
+
+.services-web-note {
+    margin-top: 56px;
+    max-width: 68ch;
+    line-height: 2;
+    opacity: 0.64;
+}
+
+.services-free-note {
+    margin: 4px 0 16px 0;
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    opacity: 0.72;
+}
+
+.services-book-btn--light {
+    background: #fff;
+    color: var(--sumi-black);
+    border: 1px solid rgba(24, 26, 27, 0.42);
+    box-shadow: none;
+    opacity: 0.9;
+    transition: opacity 0.18s ease, background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.services-book-btn--light:hover,
+.services-book-btn--light:active,
+.services-book-btn--light:focus-visible {
+    background: rgba(24, 26, 27, 0.06);
+    color: var(--sumi-black);
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+.services-final-cta--compact {
+    max-width: 760px;
+    padding-top: 120px;
+    padding-bottom: 170px;
+}
+
+@media (max-width: 768px) {
+    .services-course {
+        padding-top: 88px;
+    }
+
+    .services-course--warm {
+        padding: 34px 20px;
+    }
+
+    .services-menu-list {
+        margin-top: 24px;
+    }
+
+    .services-menu-group--spaced {
+        margin-top: 42px;
+    }
+
+    .services-menu-item {
+        padding: 16px 0 14px;
+    }
+
+    .services-menu-name {
+        font-size: 20px;
+        white-space: normal;
+    }
+
+    .services-menu-list {
+        --services-price-col: 128px;
+    }
+
+    .services-menu-top {
+        grid-template-columns: minmax(0, 1fr) 1fr var(--services-price-col);
+        align-items: end;
+    }
+
+    .services-menu-bottom {
+        grid-template-columns: minmax(0, 1fr) var(--services-price-col);
+        margin-top: 7px;
+    }
+
+    .services-menu-dot {
+        transform: translateY(-3px);
+    }
+
+    .services-menu-note {
+        font-size: 12.5px;
+        line-height: 1.7;
+    }
+
+    .services-web-note {
+        margin-top: 42px;
+        line-height: 1.9;
+    }
+
+    .services-soft-cta {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .services-final-cta--compact {
+        padding-top: 96px;
+        padding-bottom: 120px;
+    }
 }
