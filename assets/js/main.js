@@ -2,6 +2,10 @@
 (function () {
     "use strict";
 
+    const GA_MEASUREMENT_ID = "G-1R3D3BZ184";
+    let hasLoadedGoogleAnalytics = false;
+    let cookieBannerTimerId = null;
+
     // =========================================================
     // Helpers
     // =========================================================
@@ -10,6 +14,164 @@
         el.scrollIntoView({
             behavior: "smooth",
             block: "start"
+        });
+    }
+
+    function getCookieConsent() {
+        try {
+            return localStorage.getItem("cookieConsent");
+        } catch (error) {
+            return null;
+        }
+    }
+
+    function setCookieConsent(value) {
+        try {
+            localStorage.setItem("cookieConsent", value);
+        } catch (error) {
+            console.error("Cookie consent storage failed:", error);
+        }
+    }
+
+    function trackEvent(eventName, eventParams = {}) {
+        if (getCookieConsent() !== "accepted") return;
+        if (typeof window.gtag !== "function") return;
+
+        window.gtag("event", eventName, eventParams);
+    }
+
+    function loadGoogleAnalytics() {
+        if (hasLoadedGoogleAnalytics) return;
+
+        hasLoadedGoogleAnalytics = true;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () {
+            window.dataLayer.push(arguments);
+        };
+
+        window.gtag("js", new Date());
+        window.gtag("config", GA_MEASUREMENT_ID);
+
+        const gaScript = document.createElement("script");
+        gaScript.async = true;
+        gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+        gaScript.dataset.consentAnalytics = "accepted";
+
+        document.head.appendChild(gaScript);
+    }
+
+    function hideCookieBanner() {
+        const banner = document.getElementById("cookie-consent-banner");
+        if (!banner) return;
+
+        if (cookieBannerTimerId) {
+            window.clearTimeout(cookieBannerTimerId);
+            cookieBannerTimerId = null;
+        }
+
+        banner.style.opacity = "0";
+
+        window.setTimeout(() => {
+            banner.style.display = "none";
+        }, 500);
+    }
+
+    function showCookieBanner(banner) {
+        if (!banner) return;
+        if (getCookieConsent()) return;
+
+        banner.style.display = "block";
+
+        window.requestAnimationFrame(() => {
+            banner.style.opacity = "1";
+        });
+    }
+
+    function initCookieBanner() {
+        console.log("1. initCookieBanner called");
+        const consent = getCookieConsent();
+        console.log("2. Cookie status:", consent);
+        console.log("3. Banner element:", document.getElementById('cookie-consent-banner'));
+
+        let banner = document.getElementById("cookie-consent-banner");
+        if (!banner) {
+            banner = document.createElement("div");
+            banner.id = "cookie-consent-banner";
+            banner.className = "cookie-banner";
+            banner.style.display = "none";
+            banner.style.opacity = "0";
+            banner.style.transition = "opacity 0.5s ease";
+            banner.innerHTML = `
+                <p class="body">We use cookies to measure site performance. No advertising. No profiling.</p>
+                <div class="cookie-actions">
+                    <button id="btn-accept-all" class="objective-btn">Accept All</button>
+                    <button id="btn-essential" class="objective-btn">Essential Only</button>
+                    <button id="btn-decline" class="objective-btn">Decline</button>
+                </div>
+            `;
+            document.body.appendChild(banner);
+        }
+
+        if (!banner.querySelector("#btn-accept-all") || !banner.querySelector("#btn-essential") || !banner.querySelector("#btn-decline")) {
+            banner.innerHTML = `
+                <p class="body">We use cookies to measure site performance. No advertising. No profiling.</p>
+                <div class="cookie-actions">
+                    <button id="btn-accept-all" class="objective-btn">Accept All</button>
+                    <button id="btn-essential" class="objective-btn">Essential Only</button>
+                    <button id="btn-decline" class="objective-btn">Decline</button>
+                </div>
+            `;
+        }
+
+        const acceptAllButton = document.getElementById("btn-accept-all");
+        const essentialButton = document.getElementById("btn-essential");
+        const declineButton = document.getElementById("btn-decline");
+
+        if (consent === "accepted") {
+            loadGoogleAnalytics();
+        }
+
+        if (!banner || !acceptAllButton || !essentialButton || !declineButton) return;
+
+        if (banner.dataset.initialized === "true") return;
+        banner.dataset.initialized = "true";
+
+        acceptAllButton.addEventListener("click", () => {
+            setCookieConsent("accepted");
+            hideCookieBanner();
+            loadGoogleAnalytics();
+        });
+
+        essentialButton.addEventListener("click", () => {
+            setCookieConsent("essential");
+            hideCookieBanner();
+        });
+
+        declineButton.addEventListener("click", () => {
+            setCookieConsent("declined");
+            hideCookieBanner();
+        });
+
+        if (!consent) {
+            cookieBannerTimerId = window.setTimeout(() => {
+                console.log("4. Banner setTimeout triggered, showing banner...");
+                showCookieBanner(banner);
+            }, 2000);
+        }
+    }
+
+    function initCtaTracking() {
+        document.addEventListener("click", (event) => {
+            const target = event.target;
+            if (!(target instanceof Element)) return;
+
+            const cta = target.closest("#resultCTA, .cta-link, .cta-quiet-link, .services-soft-cta, .services-book-btn, .result-cta .cta");
+            if (!cta) return;
+
+            trackEvent("cta_click", {
+                cta_label: (cta.textContent || "").trim(),
+                cta_target: cta.getAttribute("href") || ""
+            });
         });
     }
 
@@ -232,10 +394,12 @@
     // Boot
     // =========================================================
     window.addEventListener("load", () => {
+        window.trackEvent = trackEvent;
         initHeroAnimation();
         initDiagnosisFlow();
         initQ3Flow();
         initEmailGate();
+        initCtaTracking();
         initHamburgerMenu();
         initHeaderAutoHide();
 
@@ -294,11 +458,23 @@
             fetch("components/footer.html?v=" + Date.now(), {
                     cache: "no-store"
                 })
-                .then(res => res.text())
+                .then(res => {
+                    if (!res.ok) throw new Error(`Footer load failed: ${res.status}`);
+                    return res.text();
+                })
                 .then(data => {
                     footerContainer.innerHTML = data;
+                    initCookieBanner();
                 })
-                .catch(err => console.error("Footer load failed:", err));
+                .catch(err => {
+                    initCookieBanner();
+                    if (getCookieConsent() === "accepted") {
+                        loadGoogleAnalytics();
+                    }
+                    console.error("Footer load failed:", err);
+                });
+        } else {
+            initCookieBanner();
         }
         // =========================================
         // STOP GRID AFTER 5 SECONDS
@@ -394,6 +570,12 @@ let step = 1;
 document.querySelectorAll(".answer").forEach((btn) => {
 
     btn.addEventListener("click", () => {
+        if (typeof window.trackEvent === "function") {
+            window.trackEvent("diagnosis_step_click", {
+                step_number: step,
+                selected_option: btn.dataset.value || "A"
+            });
+        }
 
         // store answer
         answers.push(btn.dataset.value || "A");
@@ -538,6 +720,9 @@ if (submitBtn) {
             .then(function (response) {
 
                 console.log("SUCCESS", response.status, response.text);
+                if (typeof window.trackEvent === "function") {
+                    window.trackEvent("diagnosis_complete");
+                }
 
                 // Restore button state
                 submitBtn.textContent = "Continue";
